@@ -5,7 +5,21 @@
  */
 package View;
 
+import Controller.Produto_DAO;
+import Model.Produto;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.plaf.basic.BasicMenuBarUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -13,11 +27,76 @@ import javax.swing.JOptionPane;
  */
 public class Produtos_GUI extends javax.swing.JFrame {
 
+    private void customizeMenuBar(JMenuBar menuBar) {
+
+        menuBar.setUI(new BasicMenuBarUI() {
+
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                g.setColor(Color.black);
+                g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            }
+
+        });
+
+        MenuElement[] menus = menuBar.getSubElements();
+
+        for (MenuElement menuElement : menus) {
+
+            JMenu menu = (JMenu) menuElement.getComponent();
+            changeComponentColors(menu);
+            menu.setOpaque(true);
+
+            MenuElement[] menuElements = menu.getSubElements();
+
+            for (MenuElement popupMenuElement : menuElements) {
+
+                JPopupMenu popupMenu = (JPopupMenu) popupMenuElement.getComponent();
+                popupMenu.setBorder(null);
+
+                MenuElement[] menuItens = popupMenuElement.getSubElements();
+
+                for (MenuElement menuItemElement : menuItens) {
+
+                    JMenuItem menuItem = (JMenuItem) menuItemElement.getComponent();
+                    changeComponentColors(menuItem);
+                    menuItem.setOpaque(true);
+
+                }
+            }
+        }
+    }
+
+    private void changeComponentColors(Component comp) {
+        comp.setBackground(Color.black);
+        comp.setForeground(Color.white);
+    }
+
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) produtos_table.getModel();
+        Produto_DAO pdao = new Produto_DAO();
+
+        modelo.setNumRows(0);
+        for (Produto p : pdao.read()) {
+            modelo.addRow(new Object[]{
+                p.getId(),
+                p.getNome(),
+                p.getPreco(),
+                p.getTipo()
+            });
+        }
+    }
+
     /**
      * Creates new form Produtos_GUI
      */
     public Produtos_GUI() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) produtos_table.getModel();
+        produtos_table.setRowSorter(new TableRowSorter(modelo));
+        produtos_table.setAutoCreateRowSorter(false);
+        readJTable();
+        customizeMenuBar(barrinha);
     }
 
     /**
@@ -41,7 +120,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        produtos_table = new javax.swing.JTable();
         limpar_BTN = new javax.swing.JButton();
         buscar_BTN = new javax.swing.JButton();
         editar_BTN = new javax.swing.JButton();
@@ -78,7 +157,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(preco_txt);
-        preco_txt.setBounds(540, 60, 70, 24);
+        preco_txt.setBounds(540, 60, 80, 24);
 
         jLabel3.setBackground(new java.awt.Color(103, 103, 103));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -93,7 +172,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(tipo_txt);
-        tipo_txt.setBounds(90, 160, 60, 24);
+        tipo_txt.setBounds(90, 160, 100, 24);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,7 +186,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(nomepro_txt);
-        nomepro_txt.setBounds(280, 60, 140, 24);
+        nomepro_txt.setBounds(280, 60, 150, 24);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -115,7 +194,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(20, 60, 100, 20);
         jPanel1.add(id_txt);
-        id_txt.setBounds(110, 60, 60, 24);
+        id_txt.setBounds(110, 60, 90, 24);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,8 +208,8 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(240, 150, 260, 40);
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        produtos_table.setBackground(new java.awt.Color(255, 255, 255));
+        produtos_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,8 +220,13 @@ public class Produtos_GUI extends javax.swing.JFrame {
                 "ID", "Nome", "Tipo", "Preço"
             }
         ));
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        produtos_table.setToolTipText("");
+        produtos_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                produtos_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(produtos_table);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 240, 880, 270);
@@ -160,27 +244,47 @@ public class Produtos_GUI extends javax.swing.JFrame {
 
         buscar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         buscar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
+        buscar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(buscar_BTN);
         buscar_BTN.setBounds(610, 160, 68, 50);
 
         editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
+        editar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(editar_BTN);
         editar_BTN.setBounds(700, 160, 67, 50);
 
         excluir_BTN.setBackground(new java.awt.Color(37, 36, 36));
         excluir_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/excluir (2).png"))); // NOI18N
+        excluir_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluir_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(excluir_BTN);
         excluir_BTN.setBounds(790, 160, 60, 50);
 
         add_BTN.setBackground(new java.awt.Color(37, 36, 36));
         add_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
+        add_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(add_BTN);
         add_BTN.setBounds(520, 160, 54, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(-20, 0, 900, 500);
+        jLabel1.setBounds(0, 0, 880, 480);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 890, 510);
@@ -298,6 +402,10 @@ public class Produtos_GUI extends javax.swing.JFrame {
 
     private void limpar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTNActionPerformed
         // TODO add your handling code here:
+        id_txt.setText("");
+        nomepro_txt.setText("");
+        preco_txt.setText("");
+        tipo_txt.setText("");
     }//GEN-LAST:event_limpar_BTNActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -337,13 +445,13 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
 
-        String x =  JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
-            + " \n1 - Sim"
-            + " \n2 - Não "
+        String x = JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
+                + " \n1 - Sim"
+                + " \n2 - Não "
         );
         int op = Integer.parseInt(x);
 
-        if(op == 1){
+        if (op == 1) {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -352,6 +460,73 @@ public class Produtos_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_BTNActionPerformed
+        // TODO add your handling code here:
+        String preco = preco_txt.getText();
+        preco = preco.replace(",", ".");
+        Produto p = new Produto();
+        Produto_DAO dao = new Produto_DAO();
+        p.setNome(nomepro_txt.getText());
+        p.setPreco(Double.parseDouble(preco));
+        p.setTipo(tipo_txt.getText());
+        dao.create(p);
+        readJTable();
+        id_txt.setText("");
+        nomepro_txt.setText("");
+        preco_txt.setText("");
+        tipo_txt.setText("");
+    }//GEN-LAST:event_add_BTNActionPerformed
+
+    private void buscar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_BTNActionPerformed
+        // TODO add your handling code here:
+        Produto p = new Produto();
+        Produto_DAO dao = new Produto_DAO();
+        p.setId(Integer.parseInt(id_txt.getText()));
+        dao.consul(p);
+        readJTable();
+    }//GEN-LAST:event_buscar_BTNActionPerformed
+
+    private void editar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_BTNActionPerformed
+        // TODO add your handling code here:
+        Produto p = new Produto();
+        Produto_DAO dao = new Produto_DAO();
+        p.setNome(nomepro_txt.getText());
+        p.setPreco(Double.parseDouble(preco_txt.getText()));
+        p.setTipo(tipo_txt.getText());
+        p.setId(Integer.parseInt(id_txt.getText()));
+//        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
+        dao.update(p);
+        id_txt.setText("");
+        nomepro_txt.setText("");
+        preco_txt.setText("");
+        tipo_txt.setText("");
+        readJTable();
+    }//GEN-LAST:event_editar_BTNActionPerformed
+
+    private void excluir_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluir_BTNActionPerformed
+        // TODO add your handling code here:
+         Produto p = new Produto();
+        Produto_DAO dao = new Produto_DAO();
+        p.setId(Integer.parseInt(id_txt.getText()));
+//        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
+        dao.delete(p);
+        readJTable();
+        id_txt.setText("");
+        nomepro_txt.setText("");
+        preco_txt.setText("");
+        tipo_txt.setText("");
+    }//GEN-LAST:event_excluir_BTNActionPerformed
+
+    private void produtos_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_produtos_tableMouseClicked
+        // TODO add your handling code here:
+        if (produtos_table.getSelectedRow() != -1) {
+            id_txt.setText(produtos_table.getValueAt(produtos_table.getSelectedRow(), 0).toString());
+            nomepro_txt.setText(produtos_table.getValueAt(produtos_table.getSelectedRow(), 1).toString());
+            preco_txt.setText(produtos_table.getValueAt(produtos_table.getSelectedRow(), 2).toString());
+            tipo_txt.setText(produtos_table.getValueAt(produtos_table.getSelectedRow(), 3).toString());
+        }
+    }//GEN-LAST:event_produtos_tableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,7 +569,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private javax.swing.JButton buscar_BTN;
     private javax.swing.JButton editar_BTN;
     private javax.swing.JButton excluir_BTN;
-    private javax.swing.JTextField id_txt;
+    public static javax.swing.JTextField id_txt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,10 +589,10 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton limpar_BTN;
-    private javax.swing.JTextField nomepro_txt;
-    private javax.swing.JTextField preco_txt;
-    private javax.swing.JTextField tipo_txt;
+    public static javax.swing.JTextField nomepro_txt;
+    public static javax.swing.JTextField preco_txt;
+    private javax.swing.JTable produtos_table;
+    public static javax.swing.JTextField tipo_txt;
     // End of variables declaration//GEN-END:variables
 }
