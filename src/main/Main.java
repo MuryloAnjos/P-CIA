@@ -5,6 +5,8 @@
  */
 package main;
 
+import View.Login_GUI;
+
 /**
  *
  * @author Murylo
@@ -15,7 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+                new Login_GUI().setVisible(true);
     }
     
 }
