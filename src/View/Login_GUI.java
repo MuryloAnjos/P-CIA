@@ -114,6 +114,7 @@ public class Login_GUI extends javax.swing.JFrame {
         jPanel1.add(entrar_BTN);
         entrar_BTN.setBounds(470, 350, 160, 50);
 
+        criarconta_BTN.setBackground(new java.awt.Color(103, 103, 103));
         criarconta_BTN.setForeground(new java.awt.Color(0, 0, 204));
         criarconta_BTN.setText("Criar Conta");
         criarconta_BTN.addActionListener(new java.awt.event.ActionListener() {

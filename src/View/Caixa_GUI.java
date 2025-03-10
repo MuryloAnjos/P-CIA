@@ -5,19 +5,92 @@
  */
 package View;
 
+import Controller.Venda_DAO;
+import Model.Item_Venda;
+import Model.Produto;
+import Model.Venda;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.plaf.basic.BasicMenuBarUI;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Kaua
  */
 public class Caixa_GUI extends javax.swing.JFrame {
+    
+    private void customizeMenuBar(JMenuBar menuBar) {
+
+        menuBar.setUI(new BasicMenuBarUI() {
+
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                g.setColor(Color.black);
+                g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            }
+
+        });
+
+        MenuElement[] menus = menuBar.getSubElements();
+
+        for (MenuElement menuElement : menus) {
+
+            JMenu menu = (JMenu) menuElement.getComponent();
+            changeComponentColors(menu);
+            menu.setOpaque(true);
+
+            MenuElement[] menuElements = menu.getSubElements();
+
+            for (MenuElement popupMenuElement : menuElements) {
+
+                JPopupMenu popupMenu = (JPopupMenu) popupMenuElement.getComponent();
+                popupMenu.setBorder(null);
+
+                MenuElement[] menuItens = popupMenuElement.getSubElements();
+
+                for (MenuElement menuItemElement : menuItens) {
+
+                    JMenuItem menuItem = (JMenuItem) menuItemElement.getComponent();
+                    changeComponentColors(menuItem);
+                    menuItem.setOpaque(true);
+
+                }
+            }
+        }
+    }
+
+    private void changeComponentColors(Component comp) {
+        comp.setBackground(Color.black);
+        comp.setForeground(Color.white);
+    }
+
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) item_table.getModel();
+        Venda_DAO pdao = new Venda_DAO();
+
+      
+    }
 
     /**
      * Creates new form Caixa_GUI
      */
     public Caixa_GUI() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) item_table.getModel();
+        item_table.setRowSorter(new TableRowSorter(modelo));
+        item_table.setAutoCreateRowSorter(false);
+        readJTable();
+        customizeMenuBar(barrinha);
     }
 
     /**
@@ -30,14 +103,10 @@ public class Caixa_GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        preco_txt = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        buscar_txt = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cpf_text = new javax.swing.JLabel();
         nome_text = new javax.swing.JLabel();
@@ -45,17 +114,20 @@ public class Caixa_GUI extends javax.swing.JFrame {
         finalizar_BTN = new javax.swing.JButton();
         totalizar_BTN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        item_table = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         editar_BTN = new javax.swing.JButton();
         excluir_BTN = new javax.swing.JButton();
         add_BTN = new javax.swing.JButton();
-        quant_text = new javax.swing.JLabel();
-        produto_text = new javax.swing.JLabel();
-        preco_text = new javax.swing.JLabel();
         buscar_BTN = new javax.swing.JButton();
         limpar_BTN = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        limpar_BTN1 = new javax.swing.JButton();
+        Id_venda_txt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        nomepdt_txt1 = new javax.swing.JLabel();
+        buscar_txt6 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        buscar_txt7 = new javax.swing.JTextField();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -74,51 +146,31 @@ public class Caixa_GUI extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Dados do Cliente:");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(520, 30, 180, 70);
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Produto");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(70, 130, 60, 40);
+        preco_txt.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        preco_txt.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(preco_txt);
+        preco_txt.setBounds(130, 160, 120, 40);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Preço");
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Preço :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(70, 170, 60, 40);
+        jLabel3.setBounds(70, 160, 60, 40);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Quantidade");
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Id_Venda :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(70, 210, 100, 40);
+        jLabel4.setBounds(70, 250, 100, 30);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Dados da Venda");
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Dados da Venda :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(70, 40, 150, 40);
-        jPanel1.add(buscar_txt);
-        buscar_txt.setBounds(130, 100, 60, 30);
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nome");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(520, 100, 50, 40);
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("CPF");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(520, 140, 50, 40);
+        jLabel6.setBounds(70, 20, 150, 40);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Valor Total:");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(270, 420, 120, 50);
@@ -144,28 +196,31 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(103, 103, 103));
         jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        item_table.setAutoCreateRowSorter(true);
+        item_table.setBackground(new java.awt.Color(103, 103, 103));
+        item_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "pro_id", "Produto", "Preço", "Subtotal"
+                "Produto", "Preço", "Quantidade", "Id Venda"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(item_table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 280, 880, 230);
+        jScrollPane1.setBounds(0, 300, 880, 230);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("pro_id");
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Id_Produto :");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(70, 90, 50, 40);
+        jLabel12.setBounds(70, 80, 100, 40);
 
         editar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         editar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar (1).png"))); // NOI18N
@@ -175,39 +230,77 @@ public class Caixa_GUI extends javax.swing.JFrame {
             }
         });
         jPanel1.add(editar_BTN);
-        editar_BTN.setBounds(610, 210, 67, 50);
+        editar_BTN.setBounds(570, 210, 60, 50);
 
         excluir_BTN.setBackground(new java.awt.Color(37, 36, 36));
         excluir_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/excluir (2).png"))); // NOI18N
         jPanel1.add(excluir_BTN);
-        excluir_BTN.setBounds(690, 210, 60, 50);
+        excluir_BTN.setBounds(650, 210, 60, 50);
 
         add_BTN.setBackground(new java.awt.Color(37, 36, 36));
         add_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
+        add_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(add_BTN);
-        add_BTN.setBounds(530, 210, 54, 50);
-        jPanel1.add(quant_text);
-        quant_text.setBounds(160, 220, 140, 30);
-        jPanel1.add(produto_text);
-        produto_text.setBounds(150, 140, 130, 30);
-        jPanel1.add(preco_text);
-        preco_text.setBounds(140, 180, 140, 30);
+        add_BTN.setBounds(490, 210, 54, 50);
 
         buscar_BTN.setBackground(new java.awt.Color(37, 36, 36));
         buscar_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lupa (1).png"))); // NOI18N
+        buscar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(buscar_BTN);
-        buscar_BTN.setBounds(200, 100, 60, 30);
+        buscar_BTN.setBounds(240, 90, 60, 30);
 
         limpar_BTN.setBackground(new java.awt.Color(255, 255, 51));
         limpar_BTN.setForeground(new java.awt.Color(0, 0, 0));
-        limpar_BTN.setText("Limpar");
+        limpar_BTN.setText("Abrir Nova Venda");
+        limpar_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpar_BTNActionPerformed(evt);
+            }
+        });
         jPanel1.add(limpar_BTN);
-        limpar_BTN.setBounds(730, 50, 110, 32);
+        limpar_BTN.setBounds(470, 90, 150, 32);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fundo2.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 880, 510);
+        limpar_BTN1.setBackground(new java.awt.Color(255, 255, 51));
+        limpar_BTN1.setForeground(new java.awt.Color(0, 0, 0));
+        limpar_BTN1.setText("Limpar");
+        limpar_BTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpar_BTN1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(limpar_BTN1);
+        limpar_BTN1.setBounds(710, 90, 110, 32);
+        jPanel1.add(Id_venda_txt);
+        Id_venda_txt.setBounds(160, 250, 60, 30);
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Nome_Produto :");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(70, 120, 120, 40);
+
+        nomepdt_txt1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        nomepdt_txt1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(nomepdt_txt1);
+        nomepdt_txt1.setBounds(190, 120, 120, 40);
+        jPanel1.add(buscar_txt6);
+        buscar_txt6.setBounds(160, 90, 60, 30);
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Quantidade :");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(70, 200, 100, 40);
+        jPanel1.add(buscar_txt7);
+        buscar_txt7.setBounds(170, 210, 60, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 500);
@@ -369,6 +462,47 @@ public class Caixa_GUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenu8ActionPerformed
 
+    private void add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_BTNActionPerformed
+        // TODO add your handling code here:
+        Item_Venda v = new Item_Venda();
+        Venda_DAO dao = new Venda_DAO();
+        v.setVen_id(Integer.parseInt(Id_venda_txt.getText()));
+        v.setPdt_id(Integer.parseInt(buscar_txt6.getText()));
+        v.setQuantidade(Integer.parseInt(buscar_txt7.getText()));
+//        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
+        dao.inserir_item(v);
+        readJTable();
+        Id_venda_txt.setText("");
+        nomepdt_txt1.setText("");
+        preco_txt.setText("");
+        buscar_txt7.setText("");
+        buscar_txt7.setText("");
+        
+
+//        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
+  
+        dao.read(v);
+    }//GEN-LAST:event_add_BTNActionPerformed
+
+    private void buscar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_BTNActionPerformed
+        // TODO add your handling code here:
+        Produto p = new Produto();
+        Venda_DAO dao = new Venda_DAO();
+        p.setId(Integer.parseInt(buscar_txt6.getText()));
+//        p.setTipo(tipopdt_cmb.getSelectedItem().toString().toLowerCase());
+        dao.consultar(p);
+        readJTable();
+    }//GEN-LAST:event_buscar_BTNActionPerformed
+
+    private void limpar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTNActionPerformed
+        // TODO add your handling code here:
+        new ddscliente_GUI().setVisible(true);
+    }//GEN-LAST:event_limpar_BTNActionPerformed
+
+    private void limpar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTN1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_limpar_BTN1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,23 +539,23 @@ public class Caixa_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField Id_venda_txt;
     private javax.swing.JButton add_BTN;
     public static javax.swing.JMenuBar barrinha;
     private javax.swing.JButton buscar_BTN;
-    private javax.swing.JTextField buscar_txt;
+    public static javax.swing.JTextField buscar_txt6;
+    private javax.swing.JTextField buscar_txt7;
     private javax.swing.JLabel cpf_text;
     private javax.swing.JButton editar_BTN;
     private javax.swing.JButton excluir_BTN;
     private javax.swing.JButton finalizar_BTN;
-    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JTable item_table;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -435,12 +569,11 @@ public class Caixa_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton limpar_BTN;
+    private javax.swing.JButton limpar_BTN1;
     private javax.swing.JLabel nome_text;
-    private javax.swing.JLabel preco_text;
-    private javax.swing.JLabel produto_text;
-    private javax.swing.JLabel quant_text;
+    public static javax.swing.JLabel nomepdt_txt1;
+    public static javax.swing.JLabel preco_txt;
     private javax.swing.JButton totalizar_BTN;
     private javax.swing.JTextField valortl_txt;
     // End of variables declaration//GEN-END:variables

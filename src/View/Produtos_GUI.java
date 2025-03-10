@@ -208,7 +208,8 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(240, 150, 260, 40);
 
-        produtos_table.setBackground(new java.awt.Color(255, 255, 255));
+        produtos_table.setBackground(new java.awt.Color(103, 103, 103));
+        produtos_table.setForeground(new java.awt.Color(255, 255, 255));
         produtos_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
