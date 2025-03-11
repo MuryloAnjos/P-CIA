@@ -87,7 +87,7 @@ public class Login_GUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(470, 140, 31, 16);
+        jLabel3.setBounds(470, 140, 80, 16);
         jPanel1.add(email_txt);
         email_txt.setBounds(470, 160, 170, 30);
 
@@ -114,16 +114,17 @@ public class Login_GUI extends javax.swing.JFrame {
         jPanel1.add(entrar_BTN);
         entrar_BTN.setBounds(470, 350, 160, 50);
 
-        criarconta_BTN.setBackground(new java.awt.Color(103, 103, 103));
+        criarconta_BTN.setBackground(new java.awt.Color(51, 51, 51));
         criarconta_BTN.setForeground(new java.awt.Color(0, 0, 204));
         criarconta_BTN.setText("Criar Conta");
+        criarconta_BTN.setOpaque(false);
         criarconta_BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 criarconta_BTNActionPerformed(evt);
             }
         });
         jPanel1.add(criarconta_BTN);
-        criarconta_BTN.setBounds(540, 300, 140, 20);
+        criarconta_BTN.setBounds(540, 300, 110, 20);
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Não tem conta?");
@@ -139,18 +140,24 @@ public class Login_GUI extends javax.swing.JFrame {
 
     private void criarconta_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarconta_BTNActionPerformed
         new Cadastro_GUI().setVisible(true);
+         dispose();
     }//GEN-LAST:event_criarconta_BTNActionPerformed
 
     private void login_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_BTNActionPerformed
          new Login_GUI().setVisible(true);
+         dispose();
+                 
     }//GEN-LAST:event_login_BTNActionPerformed
 
     private void cadastro_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastro_BTNActionPerformed
          new Cadastro_GUI().setVisible(true);
+         dispose();
     }//GEN-LAST:event_cadastro_BTNActionPerformed
 
     private void entrar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrar_BTNActionPerformed
         new Inicio_GUI().setVisible(true);
+                       dispose();
+
     }//GEN-LAST:event_entrar_BTNActionPerformed
 
     /**

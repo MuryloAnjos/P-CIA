@@ -126,7 +126,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         editar_BTN = new javax.swing.JButton();
         excluir_BTN = new javax.swing.JButton();
         add_BTN = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -143,6 +143,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
         jPanel1.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -283,14 +284,15 @@ public class Produtos_GUI extends javax.swing.JFrame {
         jPanel1.add(add_BTN);
         add_BTN.setBounds(520, 160, 54, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 880, 480);
+        panelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
+        jPanel1.add(panelImage1);
+        panelImage1.setBounds(0, 0, 880, 500);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 890, 510);
 
         barrinha.setBackground(new java.awt.Color(0, 0, 0));
+        barrinha.setForeground(new java.awt.Color(255, 255, 255));
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jMenu1.setForeground(new java.awt.Color(255, 255, 255));
@@ -409,59 +411,6 @@ public class Produtos_GUI extends javax.swing.JFrame {
         tipo_txt.setText("");
     }//GEN-LAST:event_limpar_BTNActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        new Inicio_GUI().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        new Produtos_GUI().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        new Caixa_GUI().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu3ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new Vendas_GUI().setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-
-        String x = JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
-                + " \n1 - Sim"
-                + " \n2 - Não "
-        );
-        int op = Integer.parseInt(x);
-
-        if (op == 1) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenu8ActionPerformed
-
     private void add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_BTNActionPerformed
         // TODO add your handling code here:
         String preco = preco_txt.getText();
@@ -529,6 +478,59 @@ public class Produtos_GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_produtos_tableMouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        new Inicio_GUI().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        new Produtos_GUI().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        new Caixa_GUI().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new Vendas_GUI().setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+
+        String x =  JOptionPane.showInputDialog(null, "Deseja realmente fechar ?"
+            + " \n1 - Sim"
+            + " \n2 - Não "
+        );
+        int op = Integer.parseInt(x);
+
+        if(op == 1){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenu8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -571,7 +573,6 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private javax.swing.JButton editar_BTN;
     private javax.swing.JButton excluir_BTN;
     public static javax.swing.JTextField id_txt;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -592,6 +593,7 @@ public class Produtos_GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpar_BTN;
     public static javax.swing.JTextField nomepro_txt;
+    private org.edisoncor.gui.panel.PanelImage panelImage1;
     public static javax.swing.JTextField preco_txt;
     private javax.swing.JTable produtos_table;
     public static javax.swing.JTextField tipo_txt;

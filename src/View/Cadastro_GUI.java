@@ -63,7 +63,7 @@ public class Cadastro_GUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/os p (3).png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(-480, -90, 920, 700);
+        jLabel1.setBounds(-470, -80, 920, 700);
 
         cadastrar_BTN.setBackground(new java.awt.Color(255, 255, 0));
         cadastrar_BTN.setForeground(new java.awt.Color(0, 0, 0));
@@ -85,7 +85,7 @@ public class Cadastro_GUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(login_BTN);
-        login_BTN.setBounds(450, 0, 160, 50);
+        login_BTN.setBounds(440, 0, 160, 50);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/perfil.png"))); // NOI18N
         jPanel2.add(jLabel2);
@@ -160,6 +160,7 @@ public class Cadastro_GUI extends javax.swing.JFrame {
 
         fzlogin_BTN.setForeground(new java.awt.Color(0, 51, 204));
         fzlogin_BTN.setText("Fazer Login");
+        fzlogin_BTN.setOpaque(false);
         fzlogin_BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fzlogin_BTNActionPerformed(evt);
@@ -169,27 +170,34 @@ public class Cadastro_GUI extends javax.swing.JFrame {
         fzlogin_BTN.setBounds(600, 450, 110, 20);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 760, 550);
+        jPanel2.setBounds(0, 0, 770, 580);
 
-        setSize(new java.awt.Dimension(763, 546));
+        setSize(new java.awt.Dimension(763, 578));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_BTNActionPerformed
 JOptionPane.showMessageDialog(null,"Cadastro feito com sucesso");
         new Login_GUI().setVisible(true);
+         dispose();
+
     }//GEN-LAST:event_cadastrar_BTNActionPerformed
 
     private void login_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_BTNActionPerformed
        new Login_GUI().setVisible(true);
+               dispose();
+
     }//GEN-LAST:event_login_BTNActionPerformed
 
     private void cadastro_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastro_BTNActionPerformed
        new Cadastro_GUI().setVisible(true);
+               dispose();
+
     }//GEN-LAST:event_cadastro_BTNActionPerformed
 
     private void fzlogin_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fzlogin_BTNActionPerformed
         new Login_GUI().setVisible(true);
+        dispose();
     }//GEN-LAST:event_fzlogin_BTNActionPerformed
 
     /**

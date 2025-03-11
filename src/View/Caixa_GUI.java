@@ -128,6 +128,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
         buscar_txt6 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         buscar_txt7 = new javax.swing.JTextField();
+        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -152,25 +153,25 @@ public class Caixa_GUI extends javax.swing.JFrame {
         preco_txt.setBounds(130, 160, 120, 40);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Preço :");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(70, 160, 60, 40);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Id_Venda :");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(70, 250, 100, 30);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Dados da Venda :");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(70, 20, 150, 40);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Valor Total:");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(270, 420, 120, 50);
@@ -217,7 +218,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
         jScrollPane1.setBounds(0, 300, 880, 230);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Id_Produto :");
         jPanel1.add(jLabel12);
         jLabel12.setBounds(70, 80, 100, 40);
@@ -282,8 +283,8 @@ public class Caixa_GUI extends javax.swing.JFrame {
         Id_venda_txt.setBounds(160, 250, 60, 30);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Nome_Produto :");
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Nome Produto :");
         jPanel1.add(jLabel10);
         jLabel10.setBounds(70, 120, 120, 40);
 
@@ -295,12 +296,16 @@ public class Caixa_GUI extends javax.swing.JFrame {
         buscar_txt6.setBounds(160, 90, 60, 30);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Quantidade :");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(70, 200, 100, 40);
         jPanel1.add(buscar_txt7);
         buscar_txt7.setBounds(170, 210, 60, 30);
+
+        panelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
+        jPanel1.add(panelImage1);
+        panelImage1.setBounds(0, 0, 880, 500);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 500);
@@ -437,6 +442,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         new Vendas_GUI().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -495,12 +501,19 @@ public class Caixa_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buscar_BTNActionPerformed
 
     private void limpar_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTNActionPerformed
-        // TODO add your handling code here:
+        dispose();
         new ddscliente_GUI().setVisible(true);
     }//GEN-LAST:event_limpar_BTNActionPerformed
 
     private void limpar_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_BTN1ActionPerformed
-        // TODO add your handling code here:
+        Id_venda_txt.setText("");
+        nomepdt_txt1.setText("");
+        preco_txt.setText("");
+        buscar_txt6.setText("");
+        buscar_txt7.setText("");
+        valortl_txt.setText("");
+        nomepdt_txt1.setText("");
+        preco_txt.setText("");
     }//GEN-LAST:event_limpar_BTN1ActionPerformed
 
     /**
@@ -573,6 +586,7 @@ public class Caixa_GUI extends javax.swing.JFrame {
     private javax.swing.JButton limpar_BTN1;
     private javax.swing.JLabel nome_text;
     public static javax.swing.JLabel nomepdt_txt1;
+    private org.edisoncor.gui.panel.PanelImage panelImage1;
     public static javax.swing.JLabel preco_txt;
     private javax.swing.JButton totalizar_BTN;
     private javax.swing.JTextField valortl_txt;

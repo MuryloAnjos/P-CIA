@@ -29,10 +29,11 @@ public class Inicio_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        nvvenda_BTN = new javax.swing.JButton();
-        nvvenda_BTN1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        listavenda_BTN = new javax.swing.JButton();
+        nvproduto_BTN = new javax.swing.JButton();
         nvvenda_BTN2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         barrinha = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -50,35 +51,56 @@ public class Inicio_GUI extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
+        jPanel1.setLayout(null);
+
+        listavenda_BTN.setBackground(new java.awt.Color(255, 255, 51));
+        listavenda_BTN.setForeground(new java.awt.Color(0, 0, 0));
+        listavenda_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/listar (1).png"))); // NOI18N
+        listavenda_BTN.setText("Listar Vendas");
+        listavenda_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listavenda_BTNActionPerformed(evt);
+            }
+        });
+        jPanel1.add(listavenda_BTN);
+        listavenda_BTN.setBounds(320, 270, 190, 46);
+
+        nvproduto_BTN.setBackground(new java.awt.Color(255, 255, 51));
+        nvproduto_BTN.setForeground(new java.awt.Color(0, 0, 0));
+        nvproduto_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
+        nvproduto_BTN.setText(" Nova Produto");
+        nvproduto_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nvproduto_BTNActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nvproduto_BTN);
+        nvproduto_BTN.setBounds(510, 200, 190, 40);
+
+        nvvenda_BTN2.setBackground(new java.awt.Color(255, 255, 51));
+        nvvenda_BTN2.setForeground(new java.awt.Color(0, 0, 0));
+        nvvenda_BTN2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
+        nvvenda_BTN2.setText("Nova Venda");
+        nvvenda_BTN2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nvvenda_BTN2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nvvenda_BTN2);
+        nvvenda_BTN2.setBounds(140, 200, 190, 40);
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Inicio");
-        getContentPane().add(jLabel2);
+        jPanel1.add(jLabel2);
         jLabel2.setBounds(400, 50, 110, 70);
 
-        nvvenda_BTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
-        nvvenda_BTN.setText("Nova Venda");
-        getContentPane().add(nvvenda_BTN);
-        nvvenda_BTN.setBounds(510, 200, 190, 32);
-
-        nvvenda_BTN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/listar (1).png"))); // NOI18N
-        nvvenda_BTN1.setText("Nova Venda");
-        nvvenda_BTN1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nvvenda_BTN1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(nvvenda_BTN1);
-        nvvenda_BTN1.setBounds(320, 270, 190, 46);
-
-        nvvenda_BTN2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/adicionar (2).png"))); // NOI18N
-        nvvenda_BTN2.setText("Nova Venda");
-        getContentPane().add(nvvenda_BTN2);
-        nvvenda_BTN2.setBounds(140, 200, 190, 40);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pri_fundo.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 860, 460);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 880, 550);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(-10, -40, 860, 460);
 
         barrinha.setBackground(new java.awt.Color(0, 0, 0));
         barrinha.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,7 +198,7 @@ public class Inicio_GUI extends javax.swing.JFrame {
 
         setJMenuBar(barrinha);
 
-        setSize(new java.awt.Dimension(856, 482));
+        setSize(new java.awt.Dimension(843, 443));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,9 +258,20 @@ public class Inicio_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu3ActionPerformed
 
-    private void nvvenda_BTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nvvenda_BTN1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nvvenda_BTN1ActionPerformed
+    private void listavenda_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listavenda_BTNActionPerformed
+                        new Vendas_GUI().setVisible(true);
+dispose();
+    }//GEN-LAST:event_listavenda_BTNActionPerformed
+
+    private void nvvenda_BTN2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nvvenda_BTN2ActionPerformed
+                       new Produtos_GUI().setVisible(true);
+
+    }//GEN-LAST:event_nvvenda_BTN2ActionPerformed
+
+    private void nvproduto_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nvproduto_BTNActionPerformed
+                            new Produtos_GUI().setVisible(true);
+
+    }//GEN-LAST:event_nvproduto_BTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,8 +322,9 @@ public class Inicio_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JButton nvvenda_BTN;
-    private javax.swing.JButton nvvenda_BTN1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton listavenda_BTN;
+    private javax.swing.JButton nvproduto_BTN;
     private javax.swing.JButton nvvenda_BTN2;
     // End of variables declaration//GEN-END:variables
 }
